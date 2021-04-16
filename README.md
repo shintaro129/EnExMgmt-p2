@@ -73,7 +73,7 @@ crontab -e
 ```
 45 23 * * * /which python3の絶対パス/python3 /絶対パス/send.py
 55 23 * * * sh /usr/bin/checkdate.sh
-@reboot /usr/bin/python3 /path/scan.py&
+@reboot /usr/bin/python3 /path/scan.py &
 ```
  
 cronの起動と確認
