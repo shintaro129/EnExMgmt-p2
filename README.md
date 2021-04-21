@@ -38,7 +38,7 @@ pythonの環境を構築します。
 ```
 sudo apt install python3-pip
 pip3 install nfcpy
-pip3 install soundplay
+pip3 install pygame
 pip3 install requests
 ```
  
