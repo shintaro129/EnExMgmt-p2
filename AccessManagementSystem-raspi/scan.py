@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-
 import os
 import sys
 sys.path.insert(1, os.path.split(sys.path[0])[0])
@@ -9,7 +8,6 @@ import time
 import datetime
 import nfc
 import binascii
-from playsound import playsound
 from multiprocessing import Process,Queue
 import pygame.mixer
 
@@ -61,11 +59,11 @@ def connected(tag):
             sc = nfc.tag.tt3.ServiceCode(service_code >> 6 ,service_code & 0x3f)
             bc = nfc.tag.tt3.BlockCode(0,service=0)
             scandata = tag.read_without_encryption([sc],[bc])
-            #裏で動いている入退室音再生を起動
-            soundplay.put(0)
             #書き込み用データ整形
             scan_time = "".join(date_time[:19])
             scanID = scandata[2:10].decode("utf-8")
+            #裏で動いている入退室音再生を起動
+            soundplay.put(0)
             check = checkRecord(scanID)
             #記録用ファイルに書き込み
             logRecord(scan_time,check,scanID)
@@ -81,12 +79,12 @@ def connected(tag):
 #入退室音再生用 (並列で動かす)
 def play(soundplay):
     sound = "AccessManagementSystem-raspi/sound/sound.mp3"
+    pygame.mixer.init()
+    pygame.mixer.music.load(sound)
     while(True):
         #queueにputされたときに音を鳴らす
         queue = soundplay.get()
         if(queue == 0):
-            pygame.mixer.init()
-            pygame.mixer.music.load(sound)
             pygame.mixer.music.play(1)
             
 #並列処理用のプロセス
@@ -101,4 +99,4 @@ if __name__ == "__main__":
     #MainLoop
     while(True):
         clf.connect(rdwr={'on-connect': connected})
-        time.sleep(3)
+        time.sleep(5)
