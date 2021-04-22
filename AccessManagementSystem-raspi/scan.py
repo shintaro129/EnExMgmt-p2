@@ -33,6 +33,9 @@ def checkRecord(scanID):
     rlog = open(CACHE,"r")
     Enterlog = set(map(str,rlog.readline().splitlines().split(",")))
     rlog.close()
+    
+    print(Enterlog)
+    
     #入退室判定(True:入室,False:退室)
     if(scanID in Enterlog):
         Enterlog.remove(scanID)
