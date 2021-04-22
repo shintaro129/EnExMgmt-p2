@@ -31,7 +31,7 @@ def logRecord(scan_time,check,scanID):
 def checkRecord(scanID):
     #キャッシュ読み取り
     rlog = open(CACHE,"r")
-    Enterlog = set(map(str,rlog.readline().split(",")))
+    Enterlog = set(map(str,rlog.readline().splitlines().split(",")))
     rlog.close()
     #入退室判定(True:入室,False:退室)
     if(scanID in Enterlog):
