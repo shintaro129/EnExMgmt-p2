@@ -93,7 +93,7 @@ p_play = Process(target=play,args=(soundplay,))
 #main
 if __name__ == "__main__":
     #接続するデバイス情報
-    clf = nfc.ContactlessFrontend('usb:001:004')
+    clf = nfc.ContactlessFrontend('usb:054c:06c3')
     #並列処理開始
     p_play.start()
     #MainLoop
